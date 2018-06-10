@@ -1,0 +1,27 @@
+.list{
+    display: flex;
+    justify-content: space-around;
+    background: #555;
+    li{
+        padding: 0.15625rem 0;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        svg{
+            color:#fff;
+            width: 0.625rem;
+            height: 0.703125rem;
+        }
+        .icon_active{
+            color:#EC3E7D;
+        }    
+        span{
+            display: block;
+            font-size: 0.3125rem;
+        }
+        .active{
+            color: #EC3E7D;
+        }
+    }
+}
