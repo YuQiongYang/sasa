@@ -37,11 +37,13 @@ app.all('*', function(req, res, next) {
 });
 const limited = require('./limited.js');
 const hotBuy = require('./hotBuy.js');
+const pro_kinds = require('./pro_kinds.js');
 
 module.exports = {
   start(_port = 88) {
     app.listen(_port);
     limited.getCt(app);
     hotBuy.getCt(app);
+    pro_kinds.getCt(app);
   }
 }
