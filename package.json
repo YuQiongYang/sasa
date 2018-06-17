@@ -14,7 +14,7 @@
     "cookie-parser": "^1.4.3",
     "express-session": "^1.15.6",
     "jquery": "^3.3.1",
-    "jsonwebtoken": "^8.2.2",
+    "jsonwebtoken": "^8.3.0",
     "mongodb": "^3.1.0-beta4",
     "swiper": "^4.2.6",
     "vue": "^2.5.11",

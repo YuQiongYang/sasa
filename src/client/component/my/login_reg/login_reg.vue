@@ -2,15 +2,21 @@
 	<div class="my">
 		<div class="verify">
 			<img src="http://img1.3lian.com/2015/a1/47/d/92.jpg" />
-			<div class="loginreg">
+			<div class="loginreg" v-show="this.$store.state.user.show">
 				<img src="https://www.sasa.com/public/images/7a/f5/05/1115616d26bb4baa26c55bf0e172d0fd8dca963a.png" />
 				<div class="login">
 					<span @click="login">登陆</span>
-					<span>注册</span>
+					<span @click="reg">注册</span>
+				</div>
+			</div>
+			<div class="loging" v-show="this.$store.state.user.unshow ">
+				<img src="http://bpic.588ku.com/element_pic/01/48/84/79574442ca00dc4.jpg" />
+				<div class="login">
+					<span>{{this.$store.state.user.phone}}</span>
 				</div>
 			</div>
 				<div class="setting">
-					<span><icon name="cog"></icon></span>
+					<span @click="setting"><icon name="cog"></icon></span>
 					<span><icon name="bell"></icon></span>
 				</div>
 
@@ -30,8 +36,18 @@
 	export default {
 		methods:{
 			login(){
-				console.log(123)
+				this.$router.push({name:'login'})
+			},
+			reg(){
+				this.$router.push({name:'reg'})
+			},
+			setting(){
+				this.$router.push({name:'setting'})
 			}
+		},
+		mounted(){
+			console.log(this.$store.state.user)			
+			this.$store.dispatch('getUsers')
 		}
 	}
 </script>
@@ -67,6 +83,30 @@
 				}
 				span:nth-of-type(1){
 					border-right: 0.03125rem solid #fff;
+				}
+			}
+		}
+		.loging{
+			width: 2.65625rem;
+			position: absolute;
+			top: 46%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			img{
+				width: 100%;
+				border-radius: 50%;
+			}
+			.login{
+				width:100%;
+				margin-top: 0.15625rem;
+				display: flex;
+				justify-content: space-around;
+				span{
+					color: #fff;
+					width: 50%;
+					display: flex;
+					justify-content: center;
+					font-size:0.46875rem;
 				}
 			}
 		}

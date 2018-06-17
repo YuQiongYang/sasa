@@ -15,7 +15,7 @@ module.exports = {
 		try {
 			let result = await db.collection(_collection).find(_condition).toArray();
 			return apiResult(result.length > 0, result);
-			
+
 			if(type == "product_id") {
 				let result = await db.collection(_collection).find(_condition).toArray();
 				return apiResult(result.length > 0, result);
@@ -53,5 +53,15 @@ module.exports = {
 		} catch(error) {
 			return apiResult(false, error);
 		}
+	},
+
+	async insert(_collection, _data={}) {
+		try {
+			let result = await db.collection(_collection).insert(_data);
+			return apiResult(result.insertedCount > 0, result)
+		} catch(error) {
+			return apiResult(false, error);
+		}
+
 	}
 }

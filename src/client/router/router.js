@@ -8,6 +8,9 @@ import kinds from '../component/product_classification/product_classification.vu
 import times from '../component/times/times.vue';
 import cart from '../component/cart/cart.vue';
 import my from '../component/my/my.vue';
+import login from '../component/login/login.vue';
+import reg from '../component/reg/reg.vue';
+import setting from '../component/setting/setting.vue';
 
 const router = new VueRouter({
 	routes: [{
@@ -23,18 +26,31 @@ const router = new VueRouter({
 			path: '/kinds',
 			name: 'kinds',
 			component: kinds
-		},{
+		}, {
 			path: '/times',
 			name: 'times',
 			component: times
-		},{
+		}, {
 			path: '/cart',
 			name: 'cart',
 			component: cart
-		},{
+		}, {
 			path: '/my',
 			name: 'my',
 			component: my
+		},
+		{
+			path: '/login',
+			name: 'login',
+			component: login
+		}, {
+			path: '/reg',
+			name: 'reg',
+			component: reg
+		}, {
+			path: '/setting',
+			name: 'setting',
+			component: setting
 		}
 	]
 })

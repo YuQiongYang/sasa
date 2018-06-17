@@ -38,6 +38,7 @@ app.all('*', function(req, res, next) {
 const limited = require('./limited.js');
 const hotBuy = require('./hotBuy.js');
 const pro_kinds = require('./pro_kinds.js');
+const users = require('./users.js');
 
 module.exports = {
   start(_port = 88) {
@@ -45,5 +46,6 @@ module.exports = {
     limited.getCt(app);
     hotBuy.getCt(app);
     pro_kinds.getCt(app);
+    users.getUser(app);
   }
 }

@@ -27,7 +27,7 @@
 <script>
 	export default{
 		mounted(){
-			console.log(this.$store.state.limited)
+			this.$store.dispatch('getLimited');
 		}
 	}
 </script>

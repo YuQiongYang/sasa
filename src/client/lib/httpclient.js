@@ -37,19 +37,18 @@ export default {
         url: filterUrl(_url),
         method: 'get',
         data: _params,
-//      headers: {
-//        'auth': window.localStorage.getItem('token')
-//      }
+        headers: {
+          'auth': window.localStorage.getItem('token')
+        }
       }).then((res) => {
         if (!res.data.status && res.data.message == 'unauth') {
-          router.push({
-            name: 'login'
-          });
+//        router.push({
+//          name: 'login'
+//        });
         } else {
           resolve(res.data);
         }
       }).catch((error) => {
-        console.log(123);
         reject(error);
       })
     })
@@ -78,7 +77,7 @@ export default {
         }],
       }).then(res => {
         if (!res.data.status && res.data.error == "unauthorized") {
-          router.push('login');
+//        router.push('login');
           return false;
         }
         resolve(res.data)
