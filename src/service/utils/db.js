@@ -11,11 +11,10 @@ mc.connect('mongodb://localhost:27017', {
 })
 
 module.exports = {
-	async select(_collection, _condition = {}, type = "product_id") {
+	async select(_collection, _condition = {}, type) {
 		try {
-			let result = await db.collection(_collection).find(_condition).toArray();
-			return apiResult(result.length > 0, result);
-
+//			let result = await db.collection(_collection).find(_condition).toArray();
+//			return apiResult(result.length > 0, result);
 			if(type == "product_id") {
 				let result = await db.collection(_collection).find(_condition).toArray();
 				return apiResult(result.length > 0, result);
@@ -50,6 +49,9 @@ module.exports = {
 				}).toArray();
 				return apiResult(result.length > 0, result);
 			}
+			let result = await db.collection(_collection).find(_condition).toArray();
+			return apiResult(result.length > 0, result);
+			
 		} catch(error) {
 			return apiResult(false, error);
 		}

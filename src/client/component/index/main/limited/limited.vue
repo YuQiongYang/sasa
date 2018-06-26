@@ -9,7 +9,9 @@
 			<span class="more">查看更多特卖<icon name="chevron-right"></icon></span>
 		</div>
 		<ul>
-			<li v-for="(items,idx) in $store.state.limited.limitedData" :key="idx">
+			<li v-for="(items,idx) in $store.state.limited.limitedData" 
+				:key="idx" :id="$store.state.limited.limitedData[idx].product_info.goods_id"
+				@click="jumpDetails(idx,$event)">
 				<span class="special_time" v-show="specialTime">限时特卖</span>
 				<img v-lazy="$store.state.limited.limitedData[idx].product_info.wap_product_image" />
 				<div class="goods_details">
@@ -22,7 +24,7 @@
 						<del>￥{{$store.state.limited.limitedData[idx].price.mktprice}}</del>
 					</div>
 					<div class="buy">
-						<span>
+						<span @click="$store.dispatch('isJump');isjump(idx,$event)">
 							<icon name='shopping-cart'></icon>
 						</span>
 					</div>
@@ -35,31 +37,45 @@
 
 <script>
 	import http from '../../../../lib/httpclient';
-export default {
-	data() {
-		return {
-			specialTime: true
-		}
-	},
-	mounted() {
-		this.$store.dispatch('getLimited')
+	export default {
+		data() {
+			return {
+				specialTime: true,
+			}
+		},
+		methods: {
+			isjump(i, e) {
+				if(this.$store.state.limited.result.isLogin && e.target.tagName == 'path') {
+					let currentLi = e.target.parentNode.parentNode.parentNode.parentNode.parentNode;
+//					console.log(this.$store.state.limited.limitedData[i])
+				}
+			},
+			jumpDetails(i,e){
+				if(e.target.tagName != 'path'){
+					let id = this.$store.state.limited.limitedData[i].product_info.goods_id;
+					this.$router.push('details?'+ id);
+				}
+			}
+		},
+		mounted() {
+			this.$store.dispatch('getLimited');
 		}
 	}
 </script>
 
 <style lang="scss">
 	.limited {
-		.limited_time{
+		.limited_time {
 			padding: 0.1875rem 0.234375rem;
 			display: flex;
 			justify-content: space-between;
-			div{
-				span:nth-of-type(1){
-					color:#ec3e7d ;
+			div {
+				span:nth-of-type(1) {
+					color: #ec3e7d;
 				}
 			}
-			.more{
-				color:#aba;
+			.more {
+				color: #aba;
 				display: flex;
 				justify-content: center;
 			}
@@ -107,45 +123,44 @@ export default {
 						color: #000;
 						font-size: 0.40625rem;
 					}
-					.price{
+					.price {
 						height: 1.25rem;
 						display: flex;
 						flex-direction: column;
 						justify-content: space-between;
-						div{
-							span:nth-of-type(1){
+						div {
+							span:nth-of-type(1) {
 								background-color: #ec3e7d;
 								color: #fff;
 								padding: 0.046875rem 0.15625rem;
 							}
-							span:nth-of-type(2){
+							span:nth-of-type(2) {
 								color: #ec3e7d;
 								font-size: 0.4375rem;
 								font-weight: 600;
 							}
 						}
 					}
-					.buy{
-						span{
+					.buy {
+						span {
 							display: flex;
 							justify-content: center;
 							border-radius: 50%;
 							width: 0.78125rem;
 							height: 0.78125rem;
 							float: right;
-							background-color:#ec3e7d;
+							background-color: #ec3e7d;
 							svg {
 								color: #fff;
 								width: 0.53125rem;
 								height: 0.53125rem;
-								
 							}
 						}
 					}
 				}
 			}
 		}
-		.view_more{
+		.view_more {
 			display: flex;
 			justify-content: center;
 			border: 0.015625rem solid #ddd;

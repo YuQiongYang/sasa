@@ -7,7 +7,7 @@
 			</li>
 		</ul>
 		<ul class="hot_goods">
-			<li v-for="(obj,idx) in $store.state.hotBuy.hotData">
+			<li v-for="(obj,idx) in $store.state.hotBuy.hotData" @click="jumpDetails(idx)">
 				<img v-lazy="$store.state.hotBuy.hotData[idx].wap_product_image" />
 				<div class="hot_details">
 					<div class="name">
@@ -53,15 +53,15 @@
 				this.index = idx;
 				this.$store.state.hotBuy.params.type = obj.type;
 				this.$store.dispatch('getdata');
+			},
+			jumpDetails(i) {
+				let id = this.$store.state.hotBuy.hotData[i].goods_id;
+				console.log(this.$store.state.hotBuy.hotData[i])
+				this.$router.push('lipstic?' + id);
 			}
-			
 		},
 		mounted() {
-			http.getCt('/lipstick', {
-				type: 'product_id'
-			}).then((res) => {
-				this.$store.state.hotBuy.hotData = res.data
-			})
+			this.$store.dispatch('getdata');
 		}
 	}
 </script>
@@ -82,7 +82,6 @@
 			justify-content: space-around;
 			border-top: 0.015625rem solid #ccc;
 			background-color: #fff;
-			
 			span {
 				display: flex;
 				height: 0.9375rem;
@@ -93,7 +92,7 @@
 				color: #EC3E7D;
 			}
 		}
-		.isFixed{
+		.isFixed {
 			width: 100%;
 			position: fixed;
 			display: flex;

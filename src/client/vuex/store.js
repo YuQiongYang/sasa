@@ -7,6 +7,7 @@ import limited from '../component/index/main/limited/limited';
 import hotBuy from '../component/index/main/hotBuy/hotBuy';
 import scroll from '../component/index/main/main';
 import user from '../component/my/login_reg/login_reg';
+import details from '../component/details/details';
 import nav from '../component/nav/nav';
 
 const store = new Vuex.Store({
@@ -15,6 +16,7 @@ const store = new Vuex.Store({
         hotBuy,
         scroll,
         user,
+        details,
         nav
     }
 })

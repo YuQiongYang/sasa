@@ -1,6 +1,6 @@
 import router from '../router/router'
 import axios from 'axios'
-const baseUrl = 'http://192.168.1.104:88'
+const baseUrl = 'http://10.3.136.40:88'
 
 let filterUrl = (_url) => {
   if (_url && _url.startsWith('http')) {
@@ -41,6 +41,7 @@ export default {
           'auth': window.localStorage.getItem('token')
         }
       }).then((res) => {
+      	resolve(res.data);
         if (!res.data.status && res.data.message == 'unauth') {
 //        router.push({
 //          name: 'login'

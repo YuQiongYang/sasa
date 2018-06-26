@@ -14,7 +14,7 @@ import classification from "./classification/classification.vue";
 import special from "./special/special.vue";
 import limited from "./limited/limited.vue";
 import hotBuy from "./hotBuy/hotBuy.vue";
-import $ from "jquery";
+
 
 export default {
   data() {

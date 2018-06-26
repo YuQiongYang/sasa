@@ -35,7 +35,7 @@
 			},
 		methods:{
 			fanhui(){
-				this.$router.push({name:'my'})
+				this.$router.go(-1);
 			},
 			reg(){
 				this.$router.push({name:'reg'})
@@ -68,7 +68,7 @@
 					}).then((res) => {
 						if(res.status) {
 							console.log(res)
-							this.$router.push('my');
+							this.$router.go(-1);
 							window.localStorage.setItem('token', res.data.token);
 							this.$store.dispatch('getUsers')
 						}

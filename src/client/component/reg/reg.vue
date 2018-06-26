@@ -39,9 +39,10 @@
 		},
 		methods: {
 			fanhui() {
-				this.$router.push({
-					name: 'my'
-				})
+				//				this.$router.push({
+				//					name: 'my'
+				//				})
+				this.$router.go(-1);
 			},
 			phones() {
 				let regPhone = /^1[3|4|5|7|8][0-9]{9}$/;
@@ -83,7 +84,7 @@
 
 		},
 		mounted() {
-			
+
 		}
 	}
 </script>

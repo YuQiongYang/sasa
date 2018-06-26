@@ -11,6 +11,8 @@ import my from '../component/my/my.vue';
 import login from '../component/login/login.vue';
 import reg from '../component/reg/reg.vue';
 import setting from '../component/setting/setting.vue';
+import details from '../component/details/details.vue';
+import lipstick from '../component/details/lipstick.vue';
 
 const router = new VueRouter({
 	routes: [{
@@ -51,6 +53,14 @@ const router = new VueRouter({
 			path: '/setting',
 			name: 'setting',
 			component: setting
+		},{
+			path:'/details',
+			name:'details',
+			component:details
+		},{
+			path:'/lipstic',
+			name:'lipstick',
+			component:lipstick
 		}
 	]
 })

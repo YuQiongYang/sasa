@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import VueLazyload from 'vue-lazyload';
-import store from './client/vuex/store';
+import $ from "jquery";
 
+import store from './client/vuex/store';
 
 import 'vue-awesome/icons'
 import Icon from 'vue-awesome/components/Icon'
