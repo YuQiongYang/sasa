@@ -13,8 +13,8 @@ mc.connect('mongodb://localhost:27017', {
 module.exports = {
 	async select(_collection, _condition = {}, type) {
 		try {
-//			let result = await db.collection(_collection).find(_condition).toArray();
-//			return apiResult(result.length > 0, result);
+			//			let result = await db.collection(_collection).find(_condition).toArray();
+			//			return apiResult(result.length > 0, result);
 			if(type == "product_id") {
 				let result = await db.collection(_collection).find(_condition).toArray();
 				return apiResult(result.length > 0, result);
@@ -51,13 +51,13 @@ module.exports = {
 			}
 			let result = await db.collection(_collection).find(_condition).toArray();
 			return apiResult(result.length > 0, result);
-			
+
 		} catch(error) {
 			return apiResult(false, error);
 		}
 	},
 
-	async insert(_collection, _data={}) {
+	async insert(_collection, _data = {}) {
 		try {
 			let result = await db.collection(_collection).insert(_data);
 			return apiResult(result.insertedCount > 0, result)
@@ -65,5 +65,35 @@ module.exports = {
 			return apiResult(false, error);
 		}
 
+	},
+
+	async update(_collection, user, _condition) {
+		try {
+			let result = await db.collection(_collection).update({
+				"phone": user
+			}, {
+				$push: {
+					'allgoods': _condition
+				}
+			});
+			return apiResult(true, result);
+		} catch(error) {
+			return apiResult(false, error);
+		}
+	},
+	async replace(_collection, user, id, _condition) {
+		try {
+			let result = await db.collection(_collection).updata({
+					"phone": user,
+					"allgoods.id": id
+				}, {
+					$set: _condition
+				},
+				false,
+				true)
+			return apiResult(true, result);
+		} catch(error) {
+			return apiResult(false, error);
+		}
 	}
 }

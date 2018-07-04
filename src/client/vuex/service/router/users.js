@@ -28,34 +28,43 @@ module.exports = {
 			phone = req.body.phone;
 			let pwd = req.body.pwd;
 			let data = [];
-			result = await db.insert('users', {
-				phone,
-				pwd,
-				data
-			});
 
-			if(result.status) {
-				let token = jwt.sign({
-					phone,
-					data: []
-				}, 'joan', {
-					expiresIn: '1800s'
-				})
-				let ar = apiResult(result.status, {
-					token: token,
-					phone: phone,
-					datas: data
-				});
-				res.send(ar);
+			let verification = await db.select('users', {
+				phone
+			})
+			if(verification.status) {
+				res.send(apiResult(false,{},'该用户已注册'))
 			} else {
-				res.send(result);
+				result = await db.insert('users', {
+					phone,
+					pwd,
+					data
+				});
+
+				if(result.status) {
+					let token = jwt.sign({
+						phone,
+						data: []
+					}, 'joan', {
+						expiresIn: '1800s'
+					})
+					let ar = apiResult(result.status, {
+						token: token,
+						phone: phone,
+						datas: data
+					});
+					res.send(ar);
+				} else {
+					res.send(result);
+				}
 			}
+
 		})
-		
-		app.post('/login',async(req,res)=>{
+
+		app.post('/login', async(req, res) => {
 			phone = req.body.phone;
 			let pwd = req.body.pwd;
-			
+
 			result = await db.select('users', {
 				phone,
 				pwd,
@@ -75,13 +84,21 @@ module.exports = {
 				res.send(result);
 			}
 		})
-		
-		app.get('/user', filter, async(req, res) => {
+
+		app.post('/user', filter, async(req, res) => {
+			let goods = req.body;
+			console.log(goods)
 			let result = await db.select('users');
-			if(phone != 'undefined'){
-				res.send({isLogin:result.status,phone:phone})
-			}else{
-				res.send({isLogin:result.status})
+			if(phone != 'undefined') {
+				res.send({
+					isLogin: result.status,
+					phone: phone,
+					data: []
+				})
+			} else {
+				res.send({
+					isLogin: result.status
+				})
 			}
 		})
 	}

@@ -3,6 +3,7 @@ const apiResult = require('../utils/apiResult.js');
 
 const jwt = require('jsonwebtoken');
 const bp = require('body-parser');
+let ObjectID = require('mongodb').ObjectID;
 
 const filter = (req, res, next) => {
 
@@ -22,30 +23,28 @@ const filter = (req, res, next) => {
 
 let result;
 let phone;
+let allgoods = [];
 
 module.exports = {
 	getUser(app) {
 		app.post('/reg', async(req, res) => {
 			phone = req.body.phone;
 			let pwd = req.body.pwd;
-			let data = [];
 			result = await db.insert('users', {
 				phone,
 				pwd,
-				data
+				allgoods
 			});
 
 			if(result.status) {
 				let token = jwt.sign({
 					phone,
-					data: []
 				}, 'joan', {
 					expiresIn: '1800s'
 				})
 				let ar = apiResult(result.status, {
 					token: token,
 					phone: phone,
-					datas: data
 				});
 				res.send(ar);
 			} else {
@@ -70,6 +69,7 @@ module.exports = {
 				let ar = apiResult(result.status, {
 					token: token,
 					phone: phone,
+					allgoods: allgoods
 				});
 				res.send(ar);
 			} else {
@@ -77,28 +77,41 @@ module.exports = {
 			}
 		})
 
-		let goodsList = [];
 		app.post('/user', filter, async(req, res) => {
 
-			let result = await db.select('users');
+//			let result = await db.select('users',{});
+				let goodsData = await db.select('users', {
+					phone
+				})
+			let mygoods;
+			
 			if(phone != 'undefined') {
 				let goods = req.body.goods;
-				if(goods) {
+				if(goodsData.status && goods) {
+					let goodsList = goodsData.data[0].allgoods;
 					goods = JSON.parse(goods);
 					if(goods.id) {
-						goodsList.push(goods);
-						goodsList.forEach(function(item, idx) {
-							if(item.id == goods.id){
-								item.qty ++;
-							}
+						let idx;
+						let has = goodsList.some(function(g, i) {
+							idx = i;
+							return g.id == goods.id
 						})
-						console.log(goodsList)
+						if(has) {
+							console.log(goodsData.data[0]._id)
+							let guid = new ObjectID(goodsData.data[0]._id)
+							mygoods = await db.replace('users',phone,guid,{"allgoods.$.qty":goodsList[idx].qty++})
+						} else {
+//							goods
+							mygoods = await db.update('users', phone, goods);
+						}
 					}
-				}
 
+				}
+				 
 				res.send({
-					isLogin: result.status,
-					phone: phone
+					isLogin: goodsData.status,
+					phone: phone,
+					allgoods:goodsData.data[0]
 				})
 			} else {
 				res.send({

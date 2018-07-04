@@ -17,7 +17,6 @@ const mutations = {
       if(this.state.limited.id){
       	for(let i=0;i<_state.hotData.length;i++){
       		if(this.state.limited.id == _state.hotData[i].goods_id){
-//    			console.log(99999,_state.hotData[i])
       			this.state.limited.good = _state.hotData[i];
       		}
       	}

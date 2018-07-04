@@ -46,6 +46,7 @@
 			isJump(e) {
 				if(this.$store.state.limited.result.isLogin && e.target.className == 'cart') {
 					console.log(this.$store.state.limited.good)
+					this.$store.dispatch('getcartList')
 				}
 			}
 		},
@@ -54,7 +55,6 @@
 			this.$store.dispatch('getdata');
 		},
 		mounted() {
-			console.log(888,this.$store.state.limited)
 			this.$store.state.limited.id = (window.location.hash).slice(10);
 		}
 	}
@@ -62,11 +62,11 @@
 
 <style lang="scss">
 	.jdetails {
-		width: 100%;
+		/*width: 100%;*/
 		height: 100%;
 		display: flex;
 		flex-direction: column;
-		justify-content: space-between;
+		/*justify-content: space-between;*/
 		.jhead {
 			/*width: 100%;*/
 			height: 0.9375rem;
@@ -88,6 +88,8 @@
 		}
 		.main {
 			flex: 1;
+			height: 100%;
+			overflow-x: hidden;
 			.jimage {
 				img {
 					width: 100%;

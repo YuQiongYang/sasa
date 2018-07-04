@@ -9,9 +9,7 @@
 			<span class="more">查看更多特卖<icon name="chevron-right"></icon></span>
 		</div>
 		<ul>
-			<li v-for="(items,idx) in $store.state.limited.limitedData" 
-				:key="idx" :id="$store.state.limited.limitedData[idx].product_info.goods_id"
-				@click="jumpDetails(idx,$event)">
+			<li v-for="(items,idx) in $store.state.limited.limitedData" :key="idx" :id="$store.state.limited.limitedData[idx].product_info.goods_id" @click="jumpDetails(idx,$event)">
 				<span class="special_time" v-show="specialTime">限时特卖</span>
 				<img v-lazy="$store.state.limited.limitedData[idx].product_info.wap_product_image" />
 				<div class="goods_details">
@@ -24,7 +22,7 @@
 						<del>￥{{$store.state.limited.limitedData[idx].price.mktprice}}</del>
 					</div>
 					<div class="buy">
-						<span @click="$store.dispatch('isJump');isjump(idx,$event)">
+						<span class="carts" @click="isjump(idx,$event);$store.dispatch('getLimited');$store.dispatch('isJump');">
 							<icon name='shopping-cart'></icon>
 						</span>
 					</div>
@@ -47,18 +45,23 @@
 			isjump(i, e) {
 				if(this.$store.state.limited.result.isLogin && e.target.tagName == 'path') {
 					let currentLi = e.target.parentNode.parentNode.parentNode.parentNode.parentNode;
-//					console.log(this.$store.state.limited.limitedData[i])
+					for(let i = 0; i < this.$store.state.limited.limitedData.length; i++) {
+						if($(currentLi).prop('id') && $(currentLi).prop('id') === this.$store.state.limited.limitedData[i].product_info.goods_id) {
+							this.$store.state.limited.good = this.$store.state.limited.limitedData[i];
+						}
+					}
 				}
 			},
-			jumpDetails(i,e){
-				if(e.target.tagName != 'path'){
+			jumpDetails(i, e) {
+				if(e.target.tagName != 'path') {
 					let id = this.$store.state.limited.limitedData[i].product_info.goods_id;
-					this.$router.push('details?'+ id);
+					this.$router.push('details?' + id);
 				}
 			}
 		},
 		mounted() {
-			this.$store.dispatch('getLimited');
+//			this.$store.dispatch('getLimited');
+//			this.$store.dispatch('isJump');
 		}
 	}
 </script>

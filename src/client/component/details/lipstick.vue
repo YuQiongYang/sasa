@@ -54,7 +54,6 @@
 			this.$store.dispatch('getdata');
 		},
 		mounted() {
-			console.log(888,this.$store.state.limited)
 			this.$store.state.limited.id = (window.location.hash).slice(10);
 		}
 	}

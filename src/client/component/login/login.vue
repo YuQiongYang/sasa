@@ -71,6 +71,8 @@
 							this.$router.go(-1);
 							window.localStorage.setItem('token', res.data.token);
 							this.$store.dispatch('getUsers')
+						}else{
+							alert('电话或密码错误');
 						}
 					})
 				}

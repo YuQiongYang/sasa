@@ -25,18 +25,10 @@ export default {
     },
     get(_url, _params = {}) {
         return new Promise((resolve, reject) => {
-//       axios.get(filterUrl(_url), {
-//         params: _params
-//       }).then((res) => {
-//         resolve(res)
-//       }).catch((error) => {
-//         reject(error)
-//       })
-
       axios({
         url: filterUrl(_url),
         method: 'get',
-        data: _params,
+        params: _params,
         headers: {
           'auth': window.localStorage.getItem('token')
         }
@@ -56,11 +48,6 @@ export default {
   },
   post(_url, _params = {}) {
     return new Promise((resolve, reject) => {
-      // axios.post(filterUrl(_url), _params).then((res) => {
-      //     resolve(res)
-      // }).catch((error) => {
-      //     reject(error)
-      // })
       axios({
         url: filterUrl(_url),
         method: 'post',

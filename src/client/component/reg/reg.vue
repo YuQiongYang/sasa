@@ -66,7 +66,6 @@
 				} else if(this.pwds != this.pwdAgain) {
 					alert('两次密码输入不正确！')
 				} else {
-					this.$router.push('my');
 					let phone = this.phone;
 					let pwd = this.pwdAgain;
 					http.post('/reg', {
@@ -74,9 +73,14 @@
 						pwd
 					}).then((res) => {
 						if(res.status) {
+							this.$router.push('my');
 							console.log(res)
 							window.localStorage.setItem('token', res.data.token);
 							this.$store.dispatch('getUsers')
+						}else{
+							if(!res.status && res.message =='该用户已注册'){
+								alert(res.message);           
+							}
 						}
 					})
 				}
