@@ -9,9 +9,8 @@ const state = {
 
 const mutations = {
 	getUsers(_state){
-		http.post('/user').then((res)=>{
-//			console.log(888,res)
-			_state.phone = res.phone;
+		http.post('/user',{phone:_state.phone}).then((res)=>{
+//			_state.phone = res.phone;
 			if(res.isLogin){
 				_state.unshow = true;
 				_state.show = false;

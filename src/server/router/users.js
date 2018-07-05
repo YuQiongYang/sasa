@@ -123,6 +123,8 @@ module.exports = {
 		});
 
 		app.get('/user', async(req, res) => {
+			let phone = req.query.phone;
+			console.log(phone)
 			let id = req.query.id;
 			let type = req.query.type;
 			let mygoods;

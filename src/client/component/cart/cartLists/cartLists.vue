@@ -55,7 +55,8 @@
 
 					http.get('/user', {
 						id,
-						type: e.target.className
+						type: e.target.className,
+						phone:this.$store.state.user.phone
 					}).then((res) => {
 						this.cartList = res.allgoods;
 						console.log(res)
@@ -65,9 +66,7 @@
 			}
 		},
 		mounted() {
-			http.post('/user', {
-				phone: this.$store.state.user.phone
-			}).then((res) => {
+			http.post('/user',{phone:this.$store.state.user.phone}).then((res) => {
 				this.cartList = res.allgoods.allgoods
 				this.status = !res.isLogin;
 			})

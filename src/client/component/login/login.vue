@@ -67,7 +67,8 @@
 						pwd
 					}).then((res) => {
 						if(res.status) {
-							console.log(res)
+							this.$store.state.user.phone = phone;
+							console.log(res,this.$store.state.user.phone)
 							this.$router.go(-1);
 							window.localStorage.setItem('token', res.data.token);
 							this.$store.dispatch('getUsers')

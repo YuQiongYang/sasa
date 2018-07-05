@@ -11,7 +11,7 @@ const mutations = {
 		
 	},
 	determine(_state){
-		http.post('/user').then((res)=>{
+		http.post('/user',{phone:this.state.user.phone}).then((res)=>{
 			console.log(res)
 		})
 	}
