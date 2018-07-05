@@ -1,9 +1,9 @@
 <template>
 	<div class="my">
 		<div class="verify">
-			<img src="http://img1.3lian.com/2015/a1/47/d/92.jpg" />
+			<img src="http://img2.3lian.com/2014/f6/104/d/49.jpg" />
 			<div class="loginreg" v-show="this.$store.state.user.show">
-				<img src="https://www.sasa.com/public/images/7a/f5/05/1115616d26bb4baa26c55bf0e172d0fd8dca963a.png" />
+				<!--<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530781468572&di=41440f502b6da644c999d1cfcd5778b2&imgtype=0&src=http%3A%2F%2Fcbu01.alicdn.com%2Fimg%2Fibank%2F2015%2F374%2F439%2F2178934473_1158792679.jpg" />-->
 				<div class="login">
 					<span @click="login">登陆</span>
 					<span @click="reg">注册</span>
@@ -69,6 +69,10 @@
 			top: 45%;
 			left: 50%;
 			transform: translate(-50%,-50%);
+			img{
+				width: 3.125rem;
+				border-radius: 0.3125rem;
+			}
 			.login{
 				width:100%;
 				margin-top: 0.234375rem;

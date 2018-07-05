@@ -28,7 +28,7 @@
 				<icon name="heart"></icon>
 				收藏
 			</span>
-			<span>
+			<span @click="goCart">
 				<icon name="shopping-cart"></icon>
 				购物车
 			</span>
@@ -42,6 +42,9 @@
 		methods: {
 			fanhui() {
 				this.$router.go(-1);
+			},
+			goCart(){
+				this.$router.push('cart');
 			},
 			isJump(e) {
 				if(this.$store.state.limited.result.isLogin && e.target.className == 'cart') {

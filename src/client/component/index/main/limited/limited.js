@@ -6,7 +6,8 @@ const state = {
 	limitedData: [],
 	facial: [],
 	result: {},
-	good: {}
+	good: {},
+	shoppingCart:{}
 }
 
 const mutations = {
@@ -47,12 +48,16 @@ const mutations = {
 		goods = JSON.stringify(goods)
 //		console.log(goods)
 		http.post('/user', {
+			phone:this.state.user.phone,
 			goods
 		}).then((res) => {
 			console.log(res)
 			_state.result = res;
 			if(!res.isLogin) {
 				router.push('login');
+				_state.shoppingCart = [];
+			}else{
+				_state.shoppingCart = res.allgoods.allgoods;
 			}
 		})
 	},
