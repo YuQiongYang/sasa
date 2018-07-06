@@ -7,9 +7,13 @@
 			<span>购物车</span>
 		</div>
 		<div class="main">
+			<div class="checked">
+				<input type="checkbox" />
+			</div>
 			<ul>
 				<li v-for="(item,idx) in cartList" :data-id="cartList[idx].id">
-					<img v-lazy="cartList[idx].img" />
+					<input type="checkbox" />
+					<img :src="cartList[idx].img" />
 					<div class="goodsright">
 						<span>{{cartList[idx].name}}</span>
 						<div class="cal">
@@ -52,7 +56,6 @@
 			addReduce(e) {
 				if(e.target.className == 'add' || e.target.className == 'reduce') {
 					let id = $(e.target.parentNode.parentNode.parentNode.parentNode).attr('data-id');
-
 					http.get('/user', {
 						id,
 						type: e.target.className,
@@ -88,8 +91,29 @@
 			}
 		}
 		.main {
+			.checked{
+				display: flex;
+				align-items: center;
+				width: 100%;
+				height: 0.78125rem;
+				background: #dfdfdf;
+				input{
+					width: 0.46875rem;
+					height: 0.46875rem;
+					margin-left: 0.3125rem;
+				}
+			}
 			ul {
 				li {
+					position:relative;
+					padding-left: 0.3125rem;
+					input{
+						width: 0.390625rem;
+						height: 0.390625rem;
+						position: absolute;
+						top: 50%;
+						transform: translateY(-50%);
+					}
 					display: flex;
 					justify-content: space-between;
 					border-bottom: 1px solid #ddd;

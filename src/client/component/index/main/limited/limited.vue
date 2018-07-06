@@ -6,7 +6,7 @@
 				<span>9点场</span>
 				<span></span>
 			</div>
-			<span class="more">查看更多特卖<icon name="chevron-right"></icon></span>
+			<span class="more" @click="goLimited">查看更多特卖<icon name="chevron-right"></icon></span>
 		</div>
 		<ul>
 			<li v-for="(items,idx) in $store.state.limited.limitedData" :key="idx" :id="$store.state.limited.limitedData[idx].product_info.goods_id" @click="jumpDetails(idx,$event)">
@@ -29,7 +29,7 @@
 				</div>
 			</li>
 		</ul>
-		<span class="view_more">查看更多限时特卖</span>
+		<span class="view_more" @click="goLimited">查看更多限时特卖</span>
 	</div>
 </template>
 
@@ -57,6 +57,9 @@
 					let id = this.$store.state.limited.limitedData[i].product_info.goods_id;
 					this.$router.push('details?' + id);
 				}
+			},
+			goLimited(){
+				this.$router.push('times')
 			}
 		},
 		mounted() {
@@ -155,8 +158,8 @@
 							background-color: #ec3e7d;
 							svg {
 								color: #fff;
-								width: 0.53125rem;
-								height: 0.53125rem;
+								width: 0.5625rem;
+								height: 0.5625rem;
 							}
 						}
 					}

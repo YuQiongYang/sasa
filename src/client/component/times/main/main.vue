@@ -1,7 +1,9 @@
 <template>
 	<div class="limited_time">
 		<ul class="shops">
-			<li v-for="(obj,idx) in $store.state.limited.facial">
+			<li v-for="(obj,idx) in $store.state.limited.facial" 
+				:id="$store.state.limited.facial[idx].product_info.goods_id" 
+				@click="jumpDetails(idx,$event)">
 			<img v-lazy="$store.state.limited.facial[idx].product_info.wap_product_image" />
 				<div class="goods_details">
 					<span class="title">{{$store.state.limited.facial[idx].product_info.name}}&nbsp;{{$store.state.limited.facial[idx].product_info.productSize}}</span>
@@ -13,7 +15,7 @@
 						<del>￥{{$store.state.limited.facial[idx].price.mktprice}}</del>
 					</div>
 					<div class="buy">
-						<span>
+						<span @click="isjump(idx,$event);$store.dispatch('getLimited');$store.dispatch('isJump');">
 							<icon name='shopping-cart'></icon>
 						</span>
 					</div>
@@ -26,6 +28,25 @@
 
 <script>
 	export default{
+		methods:{
+			isjump(i, e) {
+				if(this.$store.state.limited.result.isLogin && e.target.tagName == 'path') {
+					console.log(123)
+					let currentLi = e.target.parentNode.parentNode.parentNode.parentNode.parentNode;
+					for(let i = 0; i < this.$store.state.limited.facial.length; i++) {
+						if($(currentLi).prop('id') && $(currentLi).prop('id') === this.$store.state.limited.facial[i].product_info.goods_id) {
+							this.$store.state.limited.good = this.$store.state.limited.facial[i];
+						}
+					}
+				}
+			},
+			jumpDetails(i, e) {
+				if(e.target.tagName != 'path') {
+					let id = this.$store.state.limited.facial[i].product_info.goods_id;
+					this.$router.push('details?' + id);
+				}
+			}
+		},
 		mounted(){
 			this.$store.dispatch('getLimited');
 		}
@@ -103,6 +124,7 @@
 						span{
 							display: flex;
 							justify-content: center;
+							align-items: center;
 							border-radius: 50%;
 							width: 0.78125rem;
 							height: 0.78125rem;
@@ -110,8 +132,8 @@
 							background-color:#ec3e7d;
 							svg {
 								color: #fff;
-								width: 0.53125rem;
-								height: 0.53125rem;
+								width: 0.5625rem;
+								height: 0.5625rem;
 								
 							}
 						}

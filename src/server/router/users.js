@@ -40,7 +40,7 @@ module.exports = {
 				let token = jwt.sign({
 					phone,
 				}, 'joan', {
-					expiresIn: '1800s'
+					expiresIn: '18000s'
 				})
 				let ar = apiResult(result.status, {
 					token: token,
@@ -65,7 +65,7 @@ module.exports = {
 				let token = jwt.sign({
 					phone,
 				}, 'joan', {
-					expiresIn: '1800s'
+					expiresIn: '18000s'
 				})
 				let ar = apiResult(result.status, {
 					token: token,
@@ -79,7 +79,7 @@ module.exports = {
 
 		app.post('/user', filter, async(req, res) => {
 			let phone = req.body.phone;
-			console.log(req.body.phone)
+//			console.log(req.body.phone)
 			let goodsData = await db.select('users', {
 				phone
 			})
@@ -124,7 +124,7 @@ module.exports = {
 
 		app.get('/user', async(req, res) => {
 			let phone = req.query.phone;
-			console.log(phone)
+//			console.log(phone)
 			let id = req.query.id;
 			let type = req.query.type;
 			let mygoods;
