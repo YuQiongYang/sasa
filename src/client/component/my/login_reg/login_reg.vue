@@ -46,7 +46,7 @@
 			}
 		},
 		mounted(){
-			console.log(this.$store.state.user)			
+//			console.log(this.$store.state.user)			
 			this.$store.dispatch('getUsers')
 		}
 	}

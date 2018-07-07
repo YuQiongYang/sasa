@@ -1,4 +1,5 @@
 import router from '../router/router'
+import store from '../vuex/store'
 import axios from 'axios'
 const baseUrl = 'http://10.3.136.40:88'
 
@@ -33,6 +34,7 @@ export default {
           'auth': window.localStorage.getItem('token')
         }
       }).then((res) => {
+      	console.log(888,res.data)
       	resolve(res.data);
         if (!res.data.status && res.data.message == 'unauth') {
 //        router.push({
@@ -63,10 +65,15 @@ export default {
           }
           return ret
         }],
-      }).then(res => {
-        if (!res.data.status && res.data.error == "unauthorized") {
-//        router.push('login');
+      }).then((res) => {
+        if (res.data.message == 'timesout') {
+        	window.localStorage.clear();
+					console.log("timesout")
+					store.state.user.show = true;
+					store.state.user.unshow = false;
           return false;
+        }else if(res.data.status){
+        	window.localStorage.setItem('user',JSON.stringify(res.data))
         }
         resolve(res.data)
       }).catch(error => {

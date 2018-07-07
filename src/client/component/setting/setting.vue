@@ -42,7 +42,10 @@
 				this.sure = false;
 			},
 			confirm(){
-				window.localStorage.clear('token');
+				window.localStorage.clear();
+				this.$store.state.user.phone = '';
+				this.$store.state.user.show = true;
+				this.$store.state.user.unshow = false;
 				this.sure = false;
 				this.$router.push({
 					name: 'my'

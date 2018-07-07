@@ -62,7 +62,7 @@
 						phone:this.$store.state.user.phone
 					}).then((res) => {
 						this.cartList = res.allgoods;
-						console.log(res)
+//						console.log(res)
 					})
 
 				}
@@ -70,6 +70,7 @@
 		},
 		mounted() {
 			http.post('/user',{phone:this.$store.state.user.phone}).then((res) => {
+//				console.log(res.allgoods.allgoods)
 				this.cartList = res.allgoods.allgoods
 				this.status = !res.isLogin;
 			})
@@ -98,6 +99,7 @@
 				height: 0.78125rem;
 				background: #dfdfdf;
 				input{
+					width: 50%;
 					width: 0.46875rem;
 					height: 0.46875rem;
 					margin-left: 0.3125rem;
@@ -108,6 +110,7 @@
 					position:relative;
 					padding-left: 0.3125rem;
 					input{
+						width: 50%;
 						width: 0.390625rem;
 						height: 0.390625rem;
 						position: absolute;
@@ -120,6 +123,7 @@
 					height: 3.125rem;
 					img {
 						width: 30%;
+						margin-left: 0.46875rem;
 					}
 					.goodsright {
 						width: 65%;

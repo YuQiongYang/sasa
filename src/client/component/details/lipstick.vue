@@ -48,7 +48,7 @@
 			},
 			isJump(e) {
 				if(this.$store.state.limited.result.isLogin && e.target.className == 'cart') {
-					console.log(this.$store.state.limited.good)
+//					console.log(this.$store.state.limited.good)
 				}
 			}
 		},

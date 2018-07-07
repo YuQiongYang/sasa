@@ -15,7 +15,9 @@
 						<del>￥{{$store.state.limited.facial[idx].price.mktprice}}</del>
 					</div>
 					<div class="buy">
-						<span @click="isjump(idx,$event);$store.dispatch('getLimited');$store.dispatch('isJump');">
+						<span @click="isjump(idx,$event);
+							$store.dispatch('getLimited');
+							$store.dispatch('isJump');">
 							<icon name='shopping-cart'></icon>
 						</span>
 					</div>
@@ -31,7 +33,6 @@
 		methods:{
 			isjump(i, e) {
 				if(this.$store.state.limited.result.isLogin && e.target.tagName == 'path') {
-					console.log(123)
 					let currentLi = e.target.parentNode.parentNode.parentNode.parentNode.parentNode;
 					for(let i = 0; i < this.$store.state.limited.facial.length; i++) {
 						if($(currentLi).prop('id') && $(currentLi).prop('id') === this.$store.state.limited.facial[i].product_info.goods_id) {

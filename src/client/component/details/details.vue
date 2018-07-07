@@ -32,7 +32,11 @@
 				<icon name="shopping-cart"></icon>
 				购物车
 			</span>
-			<span class="cart" @click="$store.dispatch('isJump');isJump($event)">加入购物车</span>
+			<span class="cart" 
+				@click="$store.dispatch('isJump');
+				$store.dispatch('getLimited');
+				$store.dispatch('verifyUser');
+				isJump($event)">加入购物车</span>
 		</div>
 	</div>
 </template>
@@ -48,16 +52,16 @@
 			},
 			isJump(e) {
 				if(this.$store.state.limited.result.isLogin && e.target.className == 'cart') {
-					console.log(this.$store.state.limited.good)
+					
 					this.$store.dispatch('getcartList')
 				}
 			}
 		},
 		beforeMount() {
-			this.$store.dispatch('getLimited');
 			this.$store.dispatch('getdata');
 		},
 		mounted() {
+			this.$store.dispatch('getLimited');
 			this.$store.state.limited.id = (window.location.hash).slice(10);
 		}
 	}

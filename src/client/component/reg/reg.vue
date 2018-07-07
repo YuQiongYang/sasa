@@ -78,9 +78,8 @@
 							window.localStorage.setItem('token', res.data.token);
 							this.$store.dispatch('getUsers')
 						}else{
-							if(!res.status && res.message =='该用户已注册'){
+							console.log(res)
 								alert(res.message);           
-							}
 						}
 					})
 				}

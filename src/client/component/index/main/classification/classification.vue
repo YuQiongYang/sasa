@@ -1,7 +1,7 @@
 <template>
 	<div class="classification">
 		<ul class="kinds">
-			<li v-for="(obj,idx) in datas">
+			<li v-for="(obj,idx) in datas" @click="goLimited">
 				<img v-lazy="obj.img" />
 				<span>{{obj.title}}</span>
 			</li>
@@ -47,6 +47,11 @@
 						title: "男士专区"
 					}
 				]
+			}
+		},
+		methods:{
+			goLimited(){
+				this.$router.push('times');
 			}
 		}
 	}

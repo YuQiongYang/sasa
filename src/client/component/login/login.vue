@@ -66,9 +66,10 @@
 						phone,
 						pwd
 					}).then((res) => {
-						if(res.status) {
-							this.$store.state.user.phone = phone;
-							console.log(res,this.$store.state.user.phone)
+						let userToken = JSON.parse(window.localStorage.getItem('user'))
+						console.log(res)
+						if(userToken && res.status) {
+							this.$store.state.user.phone = userToken.data.phone;
 							this.$router.go(-1);
 							window.localStorage.setItem('token', res.data.token);
 							this.$store.dispatch('getUsers')
@@ -79,6 +80,9 @@
 				}
 			}
 			
+		},
+		mounted(){
+			this.$store.dispatch('getUsers')
 		}
 	}
 	

@@ -20,13 +20,11 @@ const mutations = {
 			for(let i = 0; i < _state.facial.length; i++) {
 				if(_state.id && _state.id === _state.facial[i].product_info.goods_id) {
 					_state.good = _state.facial[i];
-//					console.log(666, _state.good)
 				}
 			}
 		})
 	},
 	isJump(_state) {
-//		console.log(_state.good)
 		let goods;
 		if(_state.good.product_info) {
 			goods = {
@@ -46,19 +44,20 @@ const mutations = {
 			}
 		}
 		goods = JSON.stringify(goods)
-//		console.log(goods)
 		http.post('/user', {
 			phone:this.state.user.phone,
 			goods
 		}).then((res) => {
-			console.log(res)
-			_state.result = res;
-			if(!res.isLogin) {
-				router.push('login');
-				_state.shoppingCart = [];
-			}else{
-				_state.shoppingCart = res.allgoods.allgoods;
+			if(res.message == 'timesout'){
+				window.localStorage.clear()
 			}
+			_state.result = res;
+//			if(!res.isLogin) {
+//				router.push('login');
+//				_state.shoppingCart = [];
+//			}else{
+//				_state.shoppingCart = res.allgoods.allgoods;
+//			}
 		})
 	},
 	jumpDetails(_state) {

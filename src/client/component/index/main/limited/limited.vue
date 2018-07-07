@@ -22,7 +22,10 @@
 						<del>￥{{$store.state.limited.limitedData[idx].price.mktprice}}</del>
 					</div>
 					<div class="buy">
-						<span class="carts" @click="isjump(idx,$event);$store.dispatch('getLimited');$store.dispatch('isJump');">
+						<span class="carts" 
+							@click="isjump(idx,$event);
+							$store.dispatch('getLimited');
+							$store.dispatch('isJump');">
 							<icon name='shopping-cart'></icon>
 						</span>
 					</div>
