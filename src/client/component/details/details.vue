@@ -29,6 +29,7 @@
 				收藏
 			</span>
 			<span @click="goCart">
+				<Shopcartballs ref="cart"></Shopcartballs>
 				<icon name="shopping-cart"></icon>
 				购物车
 			</span>
@@ -36,13 +37,20 @@
 				@click="$store.dispatch('isJump');
 				$store.dispatch('getLimited');
 				$store.dispatch('verifyUser');
-				isJump($event)">加入购物车</span>
+				isJump($event);
+				">加入购物车</span>
 		</div>
+		<!--<shopcartballs ref="ball"></shopcartballs>-->
 	</div>
 </template>
 
 <script>
+	import Shopcartballs from './ball.vue';
+	
 	export default {
+		components:{
+			Shopcartballs
+		},
 		methods: {
 			fanhui() {
 				this.$router.go(-1);
@@ -52,10 +60,10 @@
 			},
 			isJump(e) {
 				if(this.$store.state.limited.result.isLogin && e.target.className == 'cart') {
-					
 					this.$store.dispatch('getcartList')
 				}
-			}
+			},
+			
 		},
 		beforeMount() {
 			this.$store.dispatch('getdata');

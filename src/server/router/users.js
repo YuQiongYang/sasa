@@ -113,7 +113,7 @@ module.exports = {
 				res.send({
 					isLogin: goodsData.status,
 					phone: phone,
-//					allgoods: goodsData.data[0]
+					allgoods: goodsData.data[0]
 				})
 			} else {
 				res.send({
