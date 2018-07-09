@@ -43,7 +43,7 @@ module.exports = {
 					let token = jwt.sign({
 						phone,
 					}, 'joan', {
-						expiresIn: '500s'
+						expiresIn: '100000s'
 					})
 					let ar = apiResult(result.status, {
 						token: token,
@@ -68,7 +68,7 @@ module.exports = {
 				let token = jwt.sign({
 					phone,
 				}, 'joan', {
-					expiresIn: '500s'
+					expiresIn: '100000s'
 				})
 				let ar = apiResult(result.status, {
 					token: token,
