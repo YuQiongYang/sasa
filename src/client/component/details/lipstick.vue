@@ -32,8 +32,14 @@
 				<icon name="shopping-cart"></icon>
 				购物车
 			</span>
-			<span class="cart" @click="$store.dispatch('isJump');isJump($event)">加入购物车</span>
+			<span class="cart" 
+				@click="$store.dispatch('isJump');
+				isJump($event);
+				$store.state.limited.addCart = !$store.state.limited.addCart">加入购物车</span>
 		</div>
+		<transition name="bounce">
+			<span class="addCart" v-if="$store.state.limited.addCart">成功添加到购物车</span>
+		</transition>
 	</div>
 </template>
 
@@ -162,6 +168,33 @@
 			span:nth-child(3) {
 				width: 60%;
 				background: #EC3E7D;
+			}
+		}
+		.addCart{
+			padding: 0.078125rem;
+			border-radius: 0.15625rem;
+			position: fixed;
+			top: 40%;
+			left: 35%;
+			background: #333333;
+			color: #fff;
+			
+		}
+		.bounce-enter-active {
+			animation: bounce-in .8s;
+		}
+		.bounce-leave-active {
+			animation: bounce-in .8s reverse;
+		}
+		@keyframes bounce-in {
+			0% {
+				transform: scale(0);
+			}
+			50% {
+				transform: scale(1.5);
+			}
+			100% {
+				transform: scale(1);
 			}
 		}
 	}

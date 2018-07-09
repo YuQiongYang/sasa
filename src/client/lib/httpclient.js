@@ -34,7 +34,12 @@ export default {
           'auth': window.localStorage.getItem('token')
         }
       }).then((res) => {
-      	console.log(888,res.data)
+      	let qty = 0;
+      	res.data.allgoods.forEach((item,i)=>{
+      		return qty += item.qty
+      	})
+      	store.state.cartLists.qty = qty;
+//    	console.log(store.state.cartLists.qty)
       	resolve(res.data);
         if (!res.data.status && res.data.message == 'unauth') {
 //        router.push({
@@ -71,7 +76,7 @@ export default {
 					console.log("timesout")
 					store.state.user.show = true;
 					store.state.user.unshow = false;
-          return false;
+//        return false;
         }else if(res.data.status){
         	window.localStorage.setItem('user',JSON.stringify(res.data))
         }

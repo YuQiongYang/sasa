@@ -9,7 +9,7 @@
 		</div>
 		<div class="main">
 			<div class="jimage">
-				<img :src="$store.state.limited.good.product_info.product_image"/>
+				<img :src="$store.state.limited.good.product_info.product_image" />
 			</div>
 			<div class="jtitle">
 				<span>{{$store.state.limited.good.product_info.brief}}</span>
@@ -29,33 +29,30 @@
 				收藏
 			</span>
 			<span @click="goCart">
-				<Shopcartballs ref="cart"></Shopcartballs>
+				<!--<Shopcartballs ref="cart"></Shopcartballs>-->
 				<icon name="shopping-cart"></icon>
 				购物车
+				<span>{{$store.state.cartLists.qty}}</span>
 			</span>
-			<span class="cart" 
-				@click="$store.dispatch('isJump');
+			<span class="cart" @click="$store.dispatch('isJump');
 				$store.dispatch('getLimited');
 				$store.dispatch('verifyUser');
 				isJump($event);
-				">加入购物车</span>
+				$store.state.limited.addCart = !$store.state.limited.addCart">加入购物车</span>
 		</div>
-		<!--<shopcartballs ref="ball"></shopcartballs>-->
+		<transition name="bounce">
+			<span class="addCart" v-if="$store.state.limited.addCart">成功添加到购物车</span>
+		</transition>
 	</div>
 </template>
 
 <script>
-	import Shopcartballs from './ball.vue';
-	
 	export default {
-		components:{
-			Shopcartballs
-		},
 		methods: {
 			fanhui() {
 				this.$router.go(-1);
 			},
-			goCart(){
+			goCart() {
 				this.$router.push('cart');
 			},
 			isJump(e) {
@@ -63,7 +60,7 @@
 					this.$store.dispatch('getcartList')
 				}
 			},
-			
+
 		},
 		beforeMount() {
 			this.$store.dispatch('getdata');
@@ -173,10 +170,48 @@
 				width: 20%;
 				display: flex;
 				flex-direction: column;
+				position: relative;
+				span{
+					position: absolute;
+					right: 0.15625rem;
+					top: 0.078125rem;
+					width: 0.46875rem;
+					height: 0.46875rem;
+					font-size:0.3125rem;
+					padding: 0.046875rem;
+					border-radius: 50%;
+					background: #EC3E7D;
+				}
 			}
 			span:nth-child(3) {
 				width: 60%;
 				background: #EC3E7D;
+			}
+		}
+		.addCart {
+			padding: 0.078125rem;
+			border-radius: 0.15625rem;
+			position: fixed;
+			top: 40%;
+			left: 35%;
+			background: #333333;
+			color: #fff;
+		}
+		.bounce-enter-active {
+			animation: bounce-in .8s;
+		}
+		.bounce-leave-active {
+			animation: bounce-in .8s reverse;
+		}
+		@keyframes bounce-in {
+			0% {
+				transform: scale(0);
+			}
+			50% {
+				transform: scale(1.5);
+			}
+			100% {
+				transform: scale(1);
 			}
 		}
 	}

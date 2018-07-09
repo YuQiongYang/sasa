@@ -22,10 +22,10 @@
 						<del>￥{{$store.state.limited.limitedData[idx].price.mktprice}}</del>
 					</div>
 					<div class="buy">
-						<span class="carts" 
-							@click="isjump(idx,$event);
+						<span class="carts" @click="isjump(idx,$event);
 							$store.dispatch('getLimited');
-							$store.dispatch('isJump');">
+							$store.dispatch('isJump');
+							$store.state.limited.addCart = !$store.state.limited.addCart">
 							<icon name='shopping-cart'></icon>
 						</span>
 					</div>
@@ -33,6 +33,9 @@
 			</li>
 		</ul>
 		<span class="view_more" @click="goLimited">查看更多限时特卖</span>
+		<transition name="bounce">
+			<span class="addCart" v-if="$store.state.limited.addCart">成功添加到购物车</span>
+		</transition>
 	</div>
 </template>
 
@@ -41,7 +44,7 @@
 	export default {
 		data() {
 			return {
-				specialTime: true,
+				specialTime: true
 			}
 		},
 		methods: {
@@ -61,13 +64,13 @@
 					this.$router.push('details?' + id);
 				}
 			},
-			goLimited(){
+			goLimited() {
 				this.$router.push('times')
 			}
 		},
 		mounted() {
-//			this.$store.dispatch('getLimited');
-//			this.$store.dispatch('isJump');
+			//			this.$store.dispatch('getLimited');
+			//			this.$store.dispatch('isJump');
 		}
 	}
 </script>
@@ -174,6 +177,33 @@
 			justify-content: center;
 			border: 0.015625rem solid #ddd;
 			padding: 15px 0;
+		}
+		.addCart{
+			padding: 0.078125rem;
+			border-radius: 0.15625rem;
+			position: fixed;
+			top: 40%;
+			left: 35%;
+			background: #333333;
+			color: #fff;
+			
+		}
+		.bounce-enter-active {
+			animation: bounce-in .8s;
+		}
+		.bounce-leave-active {
+			animation: bounce-in .8s reverse;
+		}
+		@keyframes bounce-in {
+			0% {
+				transform: scale(0);
+			}
+			50% {
+				transform: scale(1.5);
+			}
+			100% {
+				transform: scale(1);
+			}
 		}
 	}
 </style>

@@ -7,7 +7,8 @@ const state = {
 	facial: [],
 	result: {},
 	good: {},
-	shoppingCart:{}
+	shoppingCart:{},
+	addCart:false
 }
 
 const mutations = {
@@ -48,8 +49,18 @@ const mutations = {
 			phone:this.state.user.phone,
 			goods
 		}).then((res) => {
+//			console.log(res)
+			let qty = 0;
+			
+			res.allgoods.allgoods.forEach((item)=>{
+				return qty += item.qty;
+			})
+			this.state.cartLists.qty = qty;
+			console.log(this.state.cartLists.qty)
+			_state.addCart = res.status;
 			if(res.message == 'timesout'){
 				window.localStorage.clear()
+				router.push('login');
 			}
 			_state.result = res;
 //			if(!res.isLogin) {

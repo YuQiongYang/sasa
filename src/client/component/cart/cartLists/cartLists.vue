@@ -4,7 +4,7 @@
 			<div class="fanhui" @click="fanhui">
 				<icon name="angle-left"></icon>
 			</div>
-			<span>购物车</span>
+			<span>购物车<span>{{$store.state.cartLists.qty}}</span></span>
 		</div>
 		<div class="main">
 			<div class="checked">
@@ -70,9 +70,15 @@
 		},
 		mounted() {
 			http.post('/user',{phone:this.$store.state.user.phone}).then((res) => {
-//				console.log(res.allgoods.allgoods)
+				console.log(res.allgoods.allgoods)	
 				this.cartList = res.allgoods.allgoods
 				this.status = !res.isLogin;
+				let qty =0;
+				this.cartList.forEach(function(item,i){
+					return qty += item.qty
+				})
+				this.$store.state.cartLists.qty = qty;
+//				console.log(this.$store.state.cartLists.qty)
 			})
 		}
 	}
@@ -89,6 +95,20 @@
 				top: 50%;
 				left: 0.46875rem;
 				transform: translateY(-40%);
+			}
+			span{
+				span{
+					display:inline-block;
+					text-align: center;
+					width:0.625rem;
+					height: 0.625rem;
+					background: #EC3E7D;
+					color: #FFFFFF;
+					border-radius: 50%;
+					font-size: 0.4375rem;
+					padding: 0.046875rem;
+					margin-left: 0.15625rem;
+				}
 			}
 		}
 		.main {

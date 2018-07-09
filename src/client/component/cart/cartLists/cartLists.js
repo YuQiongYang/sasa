@@ -2,7 +2,8 @@ import http from '../../../lib/httpclient';
 
 const state = {
 	id:0,
-	cartList:[]
+	cartList:[],
+	qty:0
 }
 
 const mutations = {

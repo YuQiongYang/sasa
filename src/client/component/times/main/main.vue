@@ -1,10 +1,8 @@
 <template>
 	<div class="limited_time">
 		<ul class="shops">
-			<li v-for="(obj,idx) in $store.state.limited.facial" 
-				:id="$store.state.limited.facial[idx].product_info.goods_id" 
-				@click="jumpDetails(idx,$event)">
-			<img v-lazy="$store.state.limited.facial[idx].product_info.wap_product_image" />
+			<li v-for="(obj,idx) in $store.state.limited.facial" :id="$store.state.limited.facial[idx].product_info.goods_id" @click="jumpDetails(idx,$event)">
+				<img v-lazy="$store.state.limited.facial[idx].product_info.wap_product_image" />
 				<div class="goods_details">
 					<span class="title">{{$store.state.limited.facial[idx].product_info.name}}&nbsp;{{$store.state.limited.facial[idx].product_info.productSize}}</span>
 					<div class="price">
@@ -17,20 +15,24 @@
 					<div class="buy">
 						<span @click="isjump(idx,$event);
 							$store.dispatch('getLimited');
-							$store.dispatch('isJump');">
+							$store.dispatch('isJump');
+							$store.state.limited.addCart = !$store.state.limited.addCart">
 							<icon name='shopping-cart'></icon>
 						</span>
 					</div>
-				</div>	
-				
+				</div>
+
 			</li>
 		</ul>
+		<transition name="bounce">
+			<span class="addCart" v-if="$store.state.limited.addCart">成功添加到购物车</span>
+		</transition>
 	</div>
 </template>
 
 <script>
-	export default{
-		methods:{
+	export default {
+		methods: {
 			isjump(i, e) {
 				if(this.$store.state.limited.result.isLogin && e.target.tagName == 'path') {
 					let currentLi = e.target.parentNode.parentNode.parentNode.parentNode.parentNode;
@@ -48,7 +50,7 @@
 				}
 			}
 		},
-		mounted(){
+		mounted() {
 			this.$store.dispatch('getLimited');
 		}
 	}
@@ -103,26 +105,26 @@
 						color: #000;
 						font-size: 0.40625rem;
 					}
-					.price{
+					.price {
 						height: 1.25rem;
 						display: flex;
 						flex-direction: column;
 						justify-content: space-between;
-						div{
-							span:nth-of-type(1){
+						div {
+							span:nth-of-type(1) {
 								background-color: #ec3e7d;
 								color: #fff;
 								padding: 0.046875rem 0.15625rem;
 							}
-							span:nth-of-type(2){
+							span:nth-of-type(2) {
 								color: #ec3e7d;
 								font-size: 0.4375rem;
 								font-weight: 600;
 							}
 						}
 					}
-					.buy{
-						span{
+					.buy {
+						span {
 							display: flex;
 							justify-content: center;
 							align-items: center;
@@ -130,17 +132,42 @@
 							width: 0.78125rem;
 							height: 0.78125rem;
 							float: right;
-							background-color:#ec3e7d;
+							background-color: #ec3e7d;
 							svg {
 								color: #fff;
 								width: 0.5625rem;
 								height: 0.5625rem;
-								
 							}
 						}
 					}
 				}
-				}
-				}
+			}
+		}
+		.addCart {
+			padding: 0.078125rem;
+			border-radius: 0.15625rem;
+			position: fixed;
+			top: 40%;
+			left: 35%;
+			background: #333333;
+			color: #fff;
+		}
+		.bounce-enter-active {
+			animation: bounce-in .8s;
+		}
+		.bounce-leave-active {
+			animation: bounce-in .8s reverse;
+		}
+		@keyframes bounce-in {
+			0% {
+				transform: scale(0);
+			}
+			50% {
+				transform: scale(1.5);
+			}
+			100% {
+				transform: scale(1);
+			}
+		}
 	}
 </style>
