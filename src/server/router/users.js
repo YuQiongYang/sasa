@@ -133,6 +133,7 @@ module.exports = {
 				phone
 			})
 			let idx;
+//			console.log(result)
 			let has = result.data[0].allgoods.some(function(g, i) {
 				idx = i;
 				return g.id == id

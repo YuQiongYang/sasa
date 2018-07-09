@@ -48,6 +48,11 @@
 
 <script>
 	export default {
+		data(){
+			return{
+				details:''
+			}
+		},
 		methods: {
 			fanhui() {
 				this.$router.go(-1);
@@ -68,6 +73,10 @@
 		mounted() {
 			this.$store.dispatch('getLimited');
 			this.$store.state.limited.id = (window.location.hash).slice(10);
+			if(this.$store.state.limited.good){
+				this.details = this.$store.state.limited.good;
+				
+			}
 		}
 	}
 </script>
