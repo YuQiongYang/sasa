@@ -73,17 +73,18 @@
 				if(res.allgoods){
 				this.cartList = res.allgoods.allgoods
 				this.status = !res.isLogin;
+				}
+			})
+			let allgoods = JSON.parse(window.localStorage.getItem('loginStatus'));
+			if(allgoods){
+				this.cartList = allgoods.allgoods.allgoods;
 				let qty =0;
 				this.cartList.forEach(function(item,i){
 					return qty += item.qty
 				})
 				this.$store.state.cartLists.qty = qty;
-//				console.log(this.$store.state.cartLists.qty)
-					
-				}
-			})
-			let allgoods = JSON.parse(window.localStorage.getItem('loginStatus'));
-			this.cartList = allgoods.allgoods.allgoods;
+				
+			}
 		}
 	}
 </script>

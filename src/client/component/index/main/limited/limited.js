@@ -51,14 +51,16 @@ const mutations = {
 		}).then((res) => {
 //			console.log(res)
 			let qty = 0;
-			
+			if(res.allgoods){
+				
 			res.allgoods.allgoods.forEach((item)=>{
 				return qty += item.qty;
 			})
 			this.state.cartLists.qty = qty;
+			}
 			console.log(this.state.cartLists.qty)
 			_state.addCart = res.status;
-			if(res.message == 'timesout'){
+			if(res.message == 'timesout' || !res.isLogin){
 				window.localStorage.clear()
 				router.push('login');
 			}
